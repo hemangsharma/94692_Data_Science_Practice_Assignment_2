@@ -35,4 +35,4 @@ Student ID: 24695785</h3>
 
 ### How to run ###
 
-In order to run this program, type 'streamlit run app.py' in the terminal from the directory where app.py is saved 
+In order to run this program, type `streamlit run app.py` in the terminal from the directory where app.py is saved 
