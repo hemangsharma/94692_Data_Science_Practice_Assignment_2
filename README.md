@@ -1,8 +1,9 @@
-# 94692 Data Science Practice
-## Building Currency Converter in Python ##
-## Name: Hemang Sharma ##
-## Student ID: 24695785 ##
-### Project Details ##
+# Building Currency Converter in Python #
+## Student Details ##
+<h3>Name: Hemang Sharma <br>
+Student ID: 24695785</h3>
+
+### Project Details ###
 
 <li>app.py: main Streamlit python script used for managing users’ inputs and displaying results</li>
 <li>api.py: python script that will contain the code for making API calls</li>
