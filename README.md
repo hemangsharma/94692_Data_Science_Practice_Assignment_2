@@ -50,7 +50,17 @@ The project aims to provide users with a reliable and user-friendly tool for cur
 - JSON
 
 ## How to Run the Program
-In order to run this program, type `streamlit run app.py` in the terminal from the directory where app.py is saved. For example `streamlit run /Users/hemang/Desktop/dsp_at2_24695785/app.py`
+
+
+1. Navigate to your project folder:
+`cd myproject`
+2. Create a new virtual environment in that folder and activate that environment:
+`python -m venv .venv`
+3. Install Streamlit in your environment:
+`pip install streamlit`
+4. Test that the installation worked:
+`streamlit hello`
+5. In order to run this program, type `streamlit run app.py` in the terminal.
 
 ## Project Structure
 
