@@ -1,38 +1,65 @@
 # Building Currency Converter in Python #
-## Student Details ##
+
+## Author
 <h3>Name: Hemang Sharma <br>
 Student ID: 24695785</h3>
 
-### Project Details ###
+## Description
 
-<li>app.py: main Streamlit python script used for managing users’ inputs and displaying results</li>
-<li>api.py: python script that will contain the code for making API calls</li>
-<li>frankfurter.py: python script that will contain the functions used for calling relevant Frankfurter endpoints and extracting information.</li>
-<li>currency.py: python script that will contain the function used for formatting the results to be displayed in the Streamlit app.</li>
-<li>README.md: a markdown file containing listing of all Python functions and instructions for running the web app</li>
+**Currency Converter** is a Python web application that allows users to convert between different currencies. This application leverages the Frankfurter API to fetch the latest exchange rates and historical rates for various currencies.
 
-### Functions Used ###
+### Features
 
-1. **app.py**:
-   - Input fields: Use Streamlit's `number_input`, `selectbox`, and `date_input` functions to get user input for the amount, source currency, target currency, and optionally, a date for historical rates.
-   - Conversion logic: When the "Convert" button is pressed, the selected date is converted to a string.
-   - API calls: Depending on whether the selected date matches the current date, it fetches either the latest exchange rates or historical rates from the frankfurter API.
-   - Currency conversion: If the API response contains rates, it calculates the converted amount based on the conversion rates, displays the result, and the inverse rate.
+- Users can enter the amount they want to convert.
+- Users can select the source currency and target currency from dropdown menus.
+- Users can choose a specific historical date for currency conversion.
+- The application calculates the converted amount based on the selected currencies and date.
+- It provides information about the conversion rate and the inverse rate.
+- The conversion result is displayed in a user-friendly format.
 
-2. **api.py**:
-   - `fetch_currencies()`: Fetches a list of available currencies from the Frankfurter API.
-   - `fetch_latest_rate(from_currency, to_currency)`: Fetches the latest exchange rate between two currencies.
-   - `fetch_historical_rate(from_currency, to_currency, date)`: Fetches the exchange rate between two currencies on a specific historical date.
+### Challenges
 
-3. **currency.py**:
-   - `format_conversion_text(date, from_currency, to_currency, rate, amount, converted_amount, inverse_rate)`: Formats the conversion result and additional information into HTML text. It includes a bold and centered display of the conversion amount and a description of the conversion rate.
+Some of the challenges faced during the development of this project include:
 
-4. **frankfurter.py**:
-   - `fetch_currencies()`: Fetches a list of available currencies from the Frankfurter API.
-   - `fetch_latest_rates()`: Fetches the latest exchange rates from the Frankfurter API.
-   - `fetch_historical_rates(date)`: Fetches historical exchange rates for a specific date from the Frankfurter API. In the `if __name__ == "__main__":` block, it also demonstrates how to fetch and store currencies, latest rates, and historical rates in JSON files.
+- Integrating external APIs and handling API responses.
+- Implementing proper error handling for API calls.
+- Formatting and displaying the conversion result in a user-friendly way.
+- Managing date input and conversion logic for historical rates.
+
+### Future Features
+
+In the future, the Currency Converter web application could be enhanced with the following features:
+
+- User authentication and profiles to save conversion history.
+- Support for a wider range of currencies.
+- Real-time currency conversion updates.
+- Currency exchange rate trend analysis.
+- Mobile application version for convenience on the go.
+
+The project aims to provide users with a reliable and user-friendly tool for currency conversion while continuously improving and expanding its functionality.
+
+## How to Setup
+### Prerequisites
+- Python 3.10.10
+- pip 23.0.1
+
+### Python packages:
+- Streamlit
+- Requests
+- Datetime
+- JSON
+
+## How to Run the Program
+In order to run this program, type `streamlit run app.py` in the terminal from the directory where app.py is saved. For example `streamlit run /Users/hemang/Desktop/dsp_at2_24695785/app.py`
+
+## Project Structure
+
+The project consists of the following files:
+
+1. app.py: The main Streamlit script for user input and displaying results.
+2. api.py: Contains code for making API calls.
+3. frankfurter.py: Includes functions for fetching exchange rate data from the Frankfurter API.
+4. currency.py: Contains functions for formatting results to be displayed in the Streamlit app.
+5. README.md: a markdown file containing listing of all Python functions and instructions for running the web app
 
 
-### How to run ###
-
-In order to run this program, type `streamlit run app.py` in the terminal from the directory where app.py is saved 

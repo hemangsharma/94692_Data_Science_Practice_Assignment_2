@@ -1,17 +1,20 @@
-def format_conversion_text(date, from_currency, to_currency, rate, amount, converted_amount, inverse_rate):
-    # Create the bold and centered text
-    bold_centered_text = f"<p style='text-align:center; font-weight:bold; font-size:24px;'>" \
-                         f" {amount:.2f} {from_currency} = {converted_amount:.2f} {to_currency}" \
-                         f"</p>"
-    
-    # Create the description text with formatting
-    description = f"<p style='text-align:center;'>" \
-                 f"The conversion rate on {date} from {from_currency} to {to_currency} was {converted_amount:.4f}. " \
-                 f"So 1.00 in {from_currency} corresponds to {converted_amount:.4f} in {to_currency}. " \
-                 f"The inverse rate was {inverse_rate:.4f}." \
-                 f"</p>"
+def round_rate(rate):
+    return round(rate, 4)
 
-    # Combine the description and bold centered text using HTML
-    formatted_text = f"{bold_centered_text}<br><br>{description}"
+def reverse_rate(rate):
+    if rate != 0:
+        return round(1 / rate, 4)
+    else:
+        return 0.0000  # Return 0.0000 for zero rate
+
+def format_output(date, from_currency, to_currency, rate, amount, converted_amount, inverse_rate):
+    formatted_text = (
+        f"{amount:.2f} {from_currency} = {converted_amount:.4f} {to_currency}\n"
+        f"\nThe conversion rate on {date} from {from_currency} to {to_currency} was {rate:.4f}. "
+        f"So 1.00 in {from_currency} corresponds to {rate:.4f} in {to_currency}. "
+        f"The inverse rate was {inverse_rate:.4f}."
+    )
 
     return formatted_text
+
+

@@ -1,44 +1,41 @@
 import streamlit as st
-import pandas as pd
-from frankfurter import fetch_latest_rates, fetch_historical_rates, fetch_currencies
-from currency import format_conversion_text
-import matplotlib.pyplot as plt
+import datetime
+from frankfurter import get_currencies_list, get_latest_rates, get_historical_rate
+from currency import format_output, reverse_rate
 
-# Create a Streamlit web app
-st.title("Currency Converter")
+# Display Streamlit App Title
+st.title("Currency Converter by Hemang")
 
-# Input fields
+# Add input fields for capturing amount, from and to currencies
 amount = st.number_input("Enter the amount to be converted", min_value=0.01, step=0.01)
-from_currency = st.selectbox("Select the source currency", fetch_currencies())
-to_currency = st.selectbox("Select the target currency", fetch_currencies())
+from_currency = st.selectbox("Select the source currency", get_currencies_list())
+to_currency = st.selectbox("Select the target currency", get_currencies_list())
 
-date_input = st.date_input("Select a date (for historical rates)", min_value=pd.to_datetime('1999-01-04'), max_value=pd.to_datetime('today'))
-
-# Button to trigger conversion
-if st.button("Convert"):
-    selected_date = date_input.strftime("%Y-%m-%d")  # Convert selected date to string
-    current_date = "2023-09-29"  # Replace with the current date or fetch it dynamically
-
-    # Fetch latest rates or historical rates
-    if selected_date == current_date:
-        data = fetch_latest_rates(from_currency, to_currency)
-    else:
-        data = fetch_historical_rates(selected_date)
+# Add a button to get and display the latest rate for selected currencies and amount
+if st.button("Get Latest Rate"):
+    latest_rates = get_latest_rates(from_currency, to_currency, amount)
     
-    if "rates" in data:
-        # Fetch conversion rates for both source and target currencies
-        from_rate = data["rates"].get(from_currency)
-        to_rate = data["rates"].get(to_currency)
-        
-        if from_rate is not None and to_rate is not None:
-            # Convert the amount from source to target currency
-            converted_amount = amount * (to_rate / from_rate)
-            inverse_rate = 1 / (to_rate / from_rate)
-
-            conversion_text = format_conversion_text(selected_date, from_currency, to_currency, to_rate, amount, converted_amount, inverse_rate)
-            st.write(conversion_text, unsafe_allow_html=True)
-            
-        else:
-            st.write(f"Currency code not found in API response.")
+    if latest_rates:
+        date, rate = latest_rates  # Unpack the tuple
+        converted_amount = amount * rate
+        inverse_rate = reverse_rate(rate)
+        output_text = format_output(date, from_currency, to_currency, rate, amount, converted_amount, inverse_rate)
+        st.write(output_text)
     else:
-        st.write("Error fetching data from the API.")
+        st.write("Error fetching latest rates.")
+
+# Add a date selector (calendar)
+selected_date = st.date_input("Select a date for historical rates", datetime.date.today(), datetime.date(1999, 1, 4))
+
+
+# Add a button to get and display the historical rate for selected date, currencies, and amount
+if st.button("Get Historical Rate"):
+    historical_rate = get_historical_rate(from_currency, to_currency, selected_date, amount)
+    
+    if historical_rate:
+        converted_amount = amount * historical_rate
+        inverse_rate = reverse_rate(historical_rate)
+        output_text = format_output(selected_date, from_currency, to_currency, historical_rate, amount, converted_amount, inverse_rate)
+        st.write(output_text)
+    else:
+        st.write("Error fetching historical rate.")
