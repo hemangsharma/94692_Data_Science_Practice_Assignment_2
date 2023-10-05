@@ -9,9 +9,9 @@ def reverse_rate(rate):
 
 def format_output(date, from_currency, to_currency, rate, amount, converted_amount, inverse_rate):
     formatted_text = (
-        f"{amount:.2f} {from_currency} = {converted_amount:.4f} {to_currency}\n"
+        f"{amount:.2f} {from_currency} = {rate:.4f} {to_currency}\n"
         f"\nThe conversion rate on {date} from {from_currency} to {to_currency} was {rate:.4f}. "
-        f"So 1.00 in {from_currency} corresponds to {rate:.4f} in {to_currency}. "
+        f"So {amount} in {from_currency} corresponds to {rate:.4f} in {to_currency}. "
         f"The inverse rate was {inverse_rate:.4f}."
     )
 
